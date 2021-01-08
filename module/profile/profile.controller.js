@@ -13,11 +13,11 @@ const profileController = {};
 profileController.upload = async (req, res) => {
 
     try {
-      console.log(req.file)
+
       
       let profile = await profileModel.findByIdAndUpdate(req.params.profileId,{
         userId: req.user.userId,
-        photo: req.file.path
+        photo: req.file.filename
       });
       if (!profile) {
 
