@@ -1,0 +1,163 @@
+
+ 
+http://localhost:8080/api/v1
+
+
+### ADMIN -----------------------------------------------------------
+
+### Register as an admin  ###
+
+POST http://localhost:8080/api/v1/auth/register
+Content-Type: application/json
+
+
+{
+    "email": "istianreid@gmail.com",
+    "password": "codecode",
+    "firstName": "istian" ,
+    "lastName": "reid",
+    "city": "taguig" ,
+    "mobileNumber": "0909090909" ,
+    "role": "admin"
+}
+
+
+### Activate account ###
+
+http://localhost:8080/api/v1/auth/activate/PouT2f5BMYip1SBt
+
+
+### Login admin or user  account ###
+
+POST http://localhost:8080/api/v1/auth/login
+Content-Type: application/json
+
+{
+    "email": "istianreid@gmail.com",
+    "password": "codecode"
+}
+
+
+### View all users registered / Admin only ###
+
+http://localhost:8080/api/v1/auth/users
+authorization: Bearer #
+
+
+### Admin can view their own data ###
+
+http://localhost:8080/api/v1/auth/users/5ff0c3ea1394743128af220b
+authorization: Bearer #
+
+
+### Admin can edit their own data ###
+
+PUT http://localhost:8080/api/v1/auth/users/#
+Content-Type: application/json
+authorization: Bearer #
+
+{
+    "role": "admin"
+}
+
+
+### Admin can't edit the data of other users ###
+
+PUT http://localhost:8080/api/v1/auth/users/#
+Content-Type: application/json
+authorization: Bearer #
+
+{
+    "name": "Userzzz"
+}
+
+
+### Admin can delete other users
+
+DELETE http://localhost:8080/api/v1/auth/users/#
+Content-Type: application/json
+authorization: Bearer #
+
+
+
+
+### USERS -----------------------------------------------------------
+
+### Register as a new user
+
+POST http://localhost:8080/api/v1/auth/register
+Content-Type: application/json
+
+{
+    "email": "",
+    "password": "",
+    "firstName": "" ,
+    "lastName": "",
+    "city": "" ,
+    "mobileNumber": "",
+}
+
+
+### Activate user account ###
+
+http://localhost:8080/api/v1/auth/activate/#
+
+
+### Login as a user ##
+
+POST http://localhost:8080/api/v1/auth/login
+Content-Type: application/json
+
+{
+    "email": "",
+    "password": ""
+}
+
+
+### User should not be able to see the list of users registered ##
+### Forbidden ##
+
+http://localhost:8080/api/v1/auth/users
+authorization: Bearer #
+
+
+### User can view their own data ##
+
+http://localhost:8080/api/v1/auth/users/#
+authorization: Bearer #
+
+
+### User can't view the data of the admin
+### Forbidden ##
+
+http://localhost:8080/api/v1/auth/users/#
+authorization: Bearer #
+
+
+### User can edit their own date
+
+PUT http://localhost:8080/api/v1/auth/users/#
+Content-Type: application/json
+authorization: Bearer #
+
+{
+    "name": "Istian Reidzzzzz"
+}
+
+
+### User should not be able to edit the admin's info ##
+### Forbidden ##
+
+http://localhost:8080/api/v1/auth/users/#
+authorization: Bearer #
+
+{
+    "name": "Adminzzz"
+}
+
+
+### User can delete their own account ##
+
+DELETE http://localhost:8080/api/v1/auth/users/#
+Content-Type: application/json
+authorization: Bearer #

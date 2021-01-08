@@ -1,0 +1,58 @@
+
+ 
+
+### ADMIN & USER-----------------------------------------------------
+
+### Both can add a requestPost ##
+
+POST http://localhost:8080/api/v1/requestPost
+Content-Type: application/json
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImlzdGlhbnJlaWRAZ21haWwuY29tIiwidXNlcklkIjoiNWZmMGMzZWExMzk0NzQzMTI4YWYyMjBiIiwibW9iaWxlTnVtYmVyIjoiMDkyNzU0MTAwMTciLCJmaXJzdE5hbWUiOiJDaHJpc3RvcGhlciIsImxhc3ROYW1lIjoicmVpZCIsImNpdHkiOiJTdHJlZXQgTm9ydGhTaWduYWwgVmlsbGFnZSBUYWd1aWcgQ2l0eSIsInJvbGUiOiJtZW1iZXIiLCJpYXQiOjE2MDk3MzYxODEsImV4cCI6MTYxMDA5NjE4MX0.EFW38itij7iSvds-tY08RDNzr0Ee-lFvO2SeFQuSEd0
+
+
+{
+    "title": "test" ,
+    "story": "test" , 
+    "photo": "test" , 
+    "bloodType": "test" , 
+    "amount": 4 ,
+    "location": "test" , 
+    "phoneNumber": 123 , 
+    "closingDate": "01/04/2021" , 
+    "hospital": "test" ,
+    "status": true 
+
+}
+
+
+### Get list of requestPosts of either the admin or the user
+
+GET http://localhost:8080/api/v1/requestPost
+Content-Type: application/json
+authorization: Bearer 
+
+
+### View their requestPost individually ##
+
+GET http://localhost:8080/api/v1/requestPost/5fda36e7ee85773158d2cafc
+Content-Type: application/json
+authorization: Bearer 
+
+
+### Both can edit their requestPost
+
+PUT http://localhost:8080/api/v1/requestPost/#
+Content-Type: application/json
+authorization: Bearer #
+
+{
+    "status": "Complete"
+}
+
+
+### Both can delete one of their listed requestPosts
+
+DELETE http://localhost:8080/api/v1/requestPost/#
+Content-Type: application/json
+authorization: Bearer #
+
