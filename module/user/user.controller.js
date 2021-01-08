@@ -60,12 +60,12 @@ userController.register = async (req, res, next) => {
 
             console.log("test")
 
-            
+
 
             const filePath = path.join(__dirname, "activation.html");
             var content = await fs.readFileSync(filePath, "utf-8");
             var view = {
-              url: `https://bloodmatch-1d6cb67ne.vercel.app/${activation}`,
+              url: `https://bloodmatch-ef5h4xoc3.vercel.app/${activation}`,
               name: {
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
