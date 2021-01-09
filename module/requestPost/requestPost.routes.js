@@ -50,7 +50,7 @@ requestPostRoutes.delete(
 
 const storage = multer.diskStorage({ 
   destination(req, file, cb){
-      cb(null, 'uploads/requestPost')
+      cb(null, 'uploads/')
   },
   filename(req, file, cb){
       cb(null, `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`)
@@ -87,7 +87,7 @@ const upload = multer({
 requestPostRoutes.post('/uploadPost',
   [authenticateToken], 
   upload.single('image'), (req, res) => {
-  res.send(`/${req.file.filename}`)
+  res.send(`${req.file.filename}`)
 })
 
 export { requestPostRoutes };

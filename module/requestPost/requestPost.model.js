@@ -49,6 +49,12 @@ var requestPostSchema = new schema({
     required: false ,
     default : "123456789"
   },
+  datePost: {
+    type: String,
+    required: false,
+    default : Date.now()
+  },
+  
   userId: {
     type: schema.Types.ObjectId,
     required: true,

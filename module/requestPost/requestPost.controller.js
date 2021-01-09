@@ -10,11 +10,11 @@ const requestPostController = {};
 // Add requestPost
 requestPostController.add = async (req, res, next) => {
   //
-  const {title, story, photo, bloodType, amount, location, phoneNumber, closingDate, hospital, status, referenceNumber} = req.body;
+  const {title, story, photo, datePost, bloodType, amount, location, phoneNumber, closingDate, hospital, status, referenceNumber} = req.body;
 
   try {
 
-    console.log(req.file)
+    console.log(req)
 
     const requestPost = await requestPostModel.create({
       userId: req.user.userId,
@@ -28,7 +28,8 @@ requestPostController.add = async (req, res, next) => {
       closingDate, 
       hospital, 
       status,
-      referenceNumber
+      referenceNumber,
+      datePost
     });
     
     // requestPost = await requestPostModel.findByIdAndUpdate(requestPost._id,{
@@ -91,6 +92,7 @@ requestPostController.add = async (req, res, next) => {
 // }
 
 // Update requestPost By ID
+
 requestPostController.update = async (req, res) => {
   try {
     let requestPost = await requestPostModel.findById(req.params.requestPostId);
