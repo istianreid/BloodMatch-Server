@@ -48,7 +48,7 @@ requestPostRoutes.delete(
 // upload Image
 const storage = multer.diskStorage({ 
   destination(req, file, cb){
-      cb(null, 'uploads/post')
+      cb(null, 'uploads')
   },
   filename(req, file, cb){
       cb(null, `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`)
