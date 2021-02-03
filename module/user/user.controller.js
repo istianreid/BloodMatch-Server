@@ -60,7 +60,7 @@ userController.register = async (req, res, next) => {
             const filePath = path.join(__dirname, "activation.html");
             var content = await fs.readFileSync(filePath, "utf-8");
             var view = {
-              url: `https://bloodmatchclient.herokuapp.com/${activation}`,
+              url: `https://bloodmatchclient.herokuapp.com/activate/${activation}`,
               name: {
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
