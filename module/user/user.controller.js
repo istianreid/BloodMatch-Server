@@ -27,7 +27,6 @@ userController.register = async (req, res, next) => {
         });
       } else {
         bcrypt.hash(req.body.password, 10, async (err, hash) => {
-          console.log(`password: ${hash}`);
           if (req.body.password === "") {
             return res.status(httpStatus.EXPECTATION_FAILED).json({
               status: { type: "invalidPassword", code: httpStatus.EXPECTATION_FAILED, },
@@ -58,20 +57,16 @@ userController.register = async (req, res, next) => {
               
             });
 
-            console.log("test")
-
-
-
             const filePath = path.join(__dirname, "activation.html");
             var content = await fs.readFileSync(filePath, "utf-8");
             var view = {
-              url: `https://bloodmatch-ef5h4xoc3.vercel.app/${activation}`,
+              url: `https://bloodmatchclient.herokuapp.com/${activation}`,
               name: {
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
               },
             };
-            console.log(view)
+
             var activationEmail = mustache.render(content, view);
 
             // email activation to user
@@ -81,10 +76,6 @@ userController.register = async (req, res, next) => {
               subject: "Activate your account",
               html: activationEmail,
             };
-
-            // console.log(activation);
-            // console.log(appConfig.gmail_password);
-            // console.log(req.body.email);
 
             transporter.sendMail(mailOptions, async function (err, info) {
               if (err) {
@@ -128,8 +119,6 @@ userController.register = async (req, res, next) => {
                 Object.assign(user, req.body)
 
                 await profile.save();
-
-                // let { password, __v, ...user } = newUser.toObject();
 
                 if (newUser) {
                   return res.status(httpStatus.CREATED).json({

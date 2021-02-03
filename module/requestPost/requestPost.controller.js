@@ -14,8 +14,6 @@ requestPostController.add = async (req, res, next) => {
 
   try {
 
-    console.log(req)
-
     const requestPost = await requestPostModel.create({
       userId: req.user.userId,
       title, 
@@ -31,12 +29,6 @@ requestPostController.add = async (req, res, next) => {
       referenceNumber,
       datePost
     });
-    
-    // requestPost = await requestPostModel.findByIdAndUpdate(requestPost._id,{
-    //   userId: req.user.userId,
-    //   photo: req.file.name
-    // });
-    // Object.assign(requestPost, req.body)
 
     const user = await userModel.findByIdAndUpdate(req.user.userId,{
       userId: req.user.userId,
@@ -60,36 +52,6 @@ requestPostController.add = async (req, res, next) => {
     });
   }
 };
-
-//requestPost upload
-// requestPostController.upload = async (req, res, next) => {
-
-//   try {
-//     let requestPost = await requestPostModel.findByIdAndUpdate(req.params.requestPostId , {
-//       userId: req.user.userId,
-//       photo: req.file.filename
-//     });
-//     if (!requestPost) {
-//       return res.status(httpStatus.BAD_REQUEST).json({
-//         status: {type: "error", code: httpStatus.BAD_REQUEST},
-//         message: "requestPost not found",
-//         data: null
-//       });
-//     }
-//     Object.assign(requestPost, req.body);
-//     return res.status(httpStatus.OK).json({ 
-//       status: {type: "success", code: httpStatus.OK},
-//       message: "successfully Upload Photo" ,
-//       data: requestPost
-//     });
-//   } catch (error) {
-//     return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ 
-//       status: {type: "error", code: httpStatus.INTERNAL_SERVER_ERROR},
-//       data : null,
-//       error: error.toString() 
-//     });
-//   }
-// }
 
 // Update requestPost By ID
 
@@ -122,8 +84,7 @@ requestPostController.update = async (req, res) => {
 // Get All requestPost
 requestPostController.findAll = async (req, res) => {
   try {
-    const user = req.user.userId;
-    let requestPosts = await requestPostModel.find({ userId: user }).populate("user");
+    let requestPosts = await requestPostModel.find();
     return res.status(httpStatus.OK).json({ 
       status: {type: "success", code: httpStatus.OK},
       message: "all Request" ,

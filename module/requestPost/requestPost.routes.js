@@ -19,8 +19,9 @@ requestPostRoutes.post(
 
 // view all 
 requestPostRoutes.get(
-  "/", [authenticateToken], 
-  asyncWrapper(requestPostController.findAll));
+  "/",
+  asyncWrapper(requestPostController.findAll)
+);
 
 
 // view one requestPost
@@ -44,19 +45,15 @@ requestPostRoutes.delete(
   asyncWrapper(requestPostController.delete)
 );
 
-// upload 
-//////////////////////////////////////////////////////////
-
-
+// upload Image
 const storage = multer.diskStorage({ 
   destination(req, file, cb){
-      cb(null, 'uploads/')
+      cb(null, 'uploads/post')
   },
   filename(req, file, cb){
       cb(null, `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`)
   }
 })
-
 function checkFileType(file, cb){
   const filetypes = /jpg|jpeg|png/
   const extname = filetypes.test(path.extname(file.originalname).toLowerCase())
@@ -68,22 +65,12 @@ function checkFileType(file, cb){
       cb('Images only!')
   }
 }
-
 const upload = multer({
   storage,
   fileFilter: function(req, file, cb){
       checkFileType(file, cb)
   }
 })
-
-
-// requestPostRoutes.post(
-//   "/uploadPost",
-//   [authenticateToken],
-//   upload.single('image'),
-//   asyncWrapper(requestPostController.add)
-// );
-
 requestPostRoutes.post('/uploadPost',
   [authenticateToken], 
   upload.single('image'), (req, res) => {

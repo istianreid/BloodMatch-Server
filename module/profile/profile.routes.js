@@ -10,13 +10,6 @@ import multer from 'multer'
 
 const profileRoutes = express.Router();
 
-// add a profile
-profileRoutes.post(
-  "/",
-  [authenticateToken],
-  asyncWrapper(profileController.add)
-);
-
 // view all 
 profileRoutes.get(
   "/", [authenticateToken], 
@@ -46,9 +39,6 @@ profileRoutes.delete(
 
 
 // upload 
-//////////////////////////////////////////////////////////
-
-
 const storage = multer.diskStorage({ 
   destination(req, file, cb){
       cb(null, 'uploads/profile')
@@ -57,7 +47,6 @@ const storage = multer.diskStorage({
       cb(null, `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`)
   }
 })
-
 function checkFileType(file, cb){
   const filetypes = /jpg|jpeg|png/
   const extname = filetypes.test(path.extname(file.originalname).toLowerCase())
@@ -69,14 +58,12 @@ function checkFileType(file, cb){
       cb('Images only!')
   }
 }
-
 const upload = multer({
   storage,
   fileFilter: function(req, file, cb){
       checkFileType(file, cb)
   }
 })
-
 profileRoutes.post(
   "/upload/:profileId",
   [authenticateToken],
@@ -84,10 +71,5 @@ profileRoutes.post(
   asyncWrapper(profileController.upload)
 );
 
-// profileRoutes.post('/uploadPost',
-//   [authenticateToken], 
-//   upload.single('image'), (req, res) => {
-//   res.send(`/${req.file.filename}`)
-// })
 
 export { profileRoutes };
